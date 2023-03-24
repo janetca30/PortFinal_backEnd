@@ -28,14 +28,14 @@ public class CProyecto {
     SProyecto sProyecto;
 
     @GetMapping("/lista")
-    public ResponseEntity<List<Proyecto>> list() {
+    public ResponseEntity<List<Proyecto>> list(){
         List<Proyecto> list = sProyecto.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<Proyecto> getById(@PathVariable("id") int id) {
-        if (!sProyecto.existsById(id)) {
+        if (!sProyecto.existsById(id)){
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         }
         Proyecto proyecto = sProyecto.getOne(id).get();

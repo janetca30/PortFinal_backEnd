@@ -1,4 +1,3 @@
-
 package com.janetca.portfinal.Dto;
 
 import javax.validation.constraints.NotBlank;
@@ -8,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class dtoEducacion {
+    
     @NotBlank
     private String tituloE;
     @NotBlank
@@ -24,6 +24,4 @@ public class dtoEducacion {
         this.anioE = anioE;
         this.imgE = imgE;
     }
-
-    
 }

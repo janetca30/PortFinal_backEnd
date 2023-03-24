@@ -32,6 +32,11 @@ public class CExperiencia {
         List<Experiencia> list = sExperiencia.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
+    
+     @GetMapping ("/persona/{id}/lista")
+    public List <Experiencia> listaPer(@PathVariable Long id){
+        return sExperiencia.findByPersonaId(id);    
+        }
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<Experiencia> getById(@PathVariable("id") int id) {

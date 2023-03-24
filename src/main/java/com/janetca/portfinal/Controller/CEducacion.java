@@ -1,4 +1,3 @@
-
 package com.janetca.portfinal.Controller;
 
 import com.janetca.portfinal.Dto.dtoEducacion;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/educacion")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CEducacion {
+    
     @Autowired
     SEducacion sEducacion;
     
@@ -34,22 +34,13 @@ public class CEducacion {
         return new ResponseEntity(list, HttpStatus.OK);
     }
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Educacion> getById(@PathVariable("id")int id){
-        if(!sEducacion.existsById(id)){
-            return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Educacion> getById(@PathVariable("id")int id) {
+        if(!sEducacion.existsById(id)) {
+            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         }
         
         Educacion educacion = sEducacion.getOne(id).get();
         return new ResponseEntity(educacion, HttpStatus.OK);
-    }
-    
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id){
-        if(!sEducacion.existsById(id)){
-            return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
-        }
-        sEducacion.delete(id);
-        return new ResponseEntity(new Mensaje("Educacion eliminada"), HttpStatus.OK);
     }
     
     @PostMapping("/create")
@@ -61,34 +52,45 @@ public class CEducacion {
             return new ResponseEntity(new Mensaje("Ese titulo ya existe"), HttpStatus.BAD_REQUEST);
         }
         
-        Educacion educacion = new Educacion(
-                dtoeducacion.getTituloE(), dtoeducacion.getDescripcionE(), dtoeducacion.getAnioE(), dtoeducacion.getImgE());
+        Educacion educacion = new Educacion(dtoeducacion.getTituloE(), dtoeducacion.getDescripcionE(), 
+                dtoeducacion.getAnioE(), dtoeducacion.getImgE());
         sEducacion.save(educacion);
-        return new ResponseEntity(new Mensaje("Educacion creada"), HttpStatus.OK);
-                
+        
+        return new ResponseEntity(new Mensaje("Educacion creada"), HttpStatus.OK);                
     }
     
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoEducacion dtoeducacion){
-        if(!sEducacion.existsById(id)){
-            return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoEducacion dtoeducacion) {
+        if(!sEducacion.existsById(id)) {
+            return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.BAD_REQUEST);
         }
+        
         if(sEducacion.existsByTituloE(dtoeducacion.getTituloE()) && sEducacion.getByTituloE(dtoeducacion.getTituloE()).get().getId() != id){
             return new ResponseEntity(new Mensaje("Ese titulo ya existe"), HttpStatus.BAD_REQUEST);
         }
+        
         if(StringUtils.isBlank(dtoeducacion.getTituloE())){
             return new ResponseEntity(new Mensaje("El campo no puede estar vacio"), HttpStatus.BAD_REQUEST);
         }
         
         Educacion educacion = sEducacion.getOne(id).get();
-        
         educacion.setTituloE(dtoeducacion.getTituloE());
         educacion.setDescripcionE(dtoeducacion.getDescripcionE());
         educacion.setAnioE(dtoeducacion.getAnioE());
         educacion.setImgE(dtoeducacion.getImgE());
         
         sEducacion.save(educacion);
-        
         return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id){
+        
+        if(!sEducacion.existsById(id)){
+            return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
+        }
+        
+        sEducacion.delete(id);
+        return new ResponseEntity(new Mensaje("Educacion eliminada"), HttpStatus.OK);
     }
 }
