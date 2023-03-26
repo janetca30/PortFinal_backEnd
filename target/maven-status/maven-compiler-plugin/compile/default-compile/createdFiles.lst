@@ -21,7 +21,6 @@ com\janetca\portfinal\Service\SRedes.class
 com\janetca\portfinal\Security\MainSecurity.class
 com\janetca\portfinal\Controller\CEducacion.class
 com\janetca\portfinal\Dto\dtoRedes.class
-com\janetca\portfinal\PortfinalApplication$1.class
 com\janetca\portfinal\PortfinalApplication.class
 com\janetca\portfinal\Repository\IPersonaRepository.class
 com\janetca\portfinal\Entity\Experiencia.class
