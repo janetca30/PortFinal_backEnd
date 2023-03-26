@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfinal-5ec3b.web.app/")
 @RequestMapping("/skill")
 public class CSkills {
 
