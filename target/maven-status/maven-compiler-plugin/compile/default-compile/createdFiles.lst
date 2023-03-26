@@ -11,7 +11,6 @@ com\janetca\portfinal\Security\Controller\Mensaje.class
 com\janetca\portfinal\Repository\RSkills.class
 com\janetca\portfinal\Security\Entity\Rol.class
 com\janetca\portfinal\Security\Controller\AuthController.class
-com\janetca\portfinal\WebConfig.class
 com\janetca\portfinal\Security\Service\RolService.class
 com\janetca\portfinal\Security\Repository\iRolRepository.class
 com\janetca\portfinal\Controller\PersonaController.class
